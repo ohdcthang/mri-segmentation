@@ -3,5 +3,5 @@ uvicorn
 websockets
 opencv-python-headless
 numpy
-tensorflow
+tensorflow-cpu
 huggingface_hub
