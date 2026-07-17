@@ -53,7 +53,6 @@ export default function App() {
 
   return (
     <div className="layout">
-      {/* ── SIDEBAR ── */}
       <aside className="sidebar">
         <div className="sidebar-logo">
           <div>
@@ -72,9 +71,7 @@ export default function App() {
         ))}
       </aside>
 
-      {/* ── MAIN ── */}
       <div className="main-wrap">
-        {/* Topbar */}
         <div className="topbar">
           <div className="topbar-left">
             <h1>Overview</h1>
@@ -83,10 +80,8 @@ export default function App() {
 
         </div>
 
-        {/* Content */}
         <div className="content">
 
-          {/* Upload card */}
           <div className="upload-card">
             <div className="upload-card-header">
               <div>
@@ -118,7 +113,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Status Banner */}
           {status === 'predicting' && (
             <div className="status-banner analyzing">
               <div className="sb-icon">🔬</div>
@@ -155,7 +149,6 @@ export default function App() {
             </div>
           )}
 
-          {/* Results */}
           <div className="results-grid">
             {[
               { num: 'MRI', label: 'Ảnh Gốc', src: selectedImage },
