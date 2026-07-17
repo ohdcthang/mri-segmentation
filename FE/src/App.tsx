@@ -173,10 +173,10 @@ export default function App() {
                     <div className="rc-empty">
                       {status === 'predicting' ? <div className="spin" /> : null}
                       <span className="rc-empty-text">
-                        {!selectedImage 
-                          ? 'Chưa có ảnh' 
-                          : status === 'predicting' 
-                            ? 'Đang xử lý...' 
+                        {!selectedImage
+                          ? 'Chưa có ảnh'
+                          : status === 'predicting'
+                            ? 'Đang xử lý...'
                             : 'Chờ kết quả'}
                       </span>
                     </div>
