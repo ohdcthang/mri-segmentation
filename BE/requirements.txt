@@ -4,3 +4,4 @@ websockets
 opencv-python-headless
 numpy
 tensorflow
+huggingface_hub

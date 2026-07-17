@@ -14,8 +14,11 @@ model = None
 async def lifespan(app: FastAPI):
     global model
     try:
-        # Load model from parent directory
-        model_path = os.path.join(os.path.dirname(__file__), '..', 'brain_tumor_unet.keras')
+        from huggingface_hub import hf_hub_download
+        
+        print("Downloading/Loading model from Hugging Face...")
+        model_path = hf_hub_download(repo_id="Thangdzzzz/mri-segmentation", filename="brain_tumor_unet.keras")
+        
         model = tf.keras.models.load_model(model_path, compile=False)
         print("✅ AI Model loaded successfully")
     except Exception as e:
