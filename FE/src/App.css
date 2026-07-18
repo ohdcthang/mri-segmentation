@@ -409,13 +409,13 @@ body {
 }
 
 .status-banner.danger {
-  border-color: #000000;
-  background: #e5e5e5;
+  border-color: #ef4444;
+  background: #fef2f2;
 }
 
 .status-banner.safe {
-  border-color: #cccccc;
-  background: #ffffff;
+  border-color: #22c55e;
+  background: #f0fdf4;
 }
 
 .sb-icon {
@@ -435,11 +435,11 @@ body {
 }
 
 .danger .sb-title {
-  color: var(--danger);
+  color: #b91c1c;
 }
 
 .safe .sb-title {
-  color: #000000;
+  color: #15803d;
 }
 
 .sb-desc {
@@ -508,7 +508,7 @@ body {
 .tumor-bar-fill {
   height: 100%;
   border-radius: 999px;
-  background: #000000;
+  background: #ef4444;
   transition: width 0.8s ease;
 }
 

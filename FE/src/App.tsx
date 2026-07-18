@@ -144,7 +144,7 @@ export default function App() {
             <div className="status-banner safe">
               <div>
                 <div className="sb-title">Không phát hiện bất thường</div>
-                <div className="sb-desc">Không phát hiện vùng tổn thương đáng.</div>
+                <div className="sb-desc">Không phát hiện vùng tổn thương.</div>
               </div>
             </div>
           )}
