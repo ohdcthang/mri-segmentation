@@ -16,11 +16,22 @@ export default function App() {
   const [status, setStatus] = useState<Status>('idle')
   const [tumorPct, setTumorPct] = useState(0)
   const fileRef = useRef<HTMLInputElement>(null)
+  const wsRef = useRef<WebSocket | null>(null)
 
-  useEffect(() => {
+  const connectWs = () => {
+    if (wsRef.current && (wsRef.current.readyState === WebSocket.OPEN || wsRef.current.readyState === WebSocket.CONNECTING)) {
+      return
+    }
     const s = new WebSocket('ws://localhost:8000/ws')
     s.onopen = () => setConnected(true)
-    s.onclose = () => setConnected(false)
+    s.onclose = () => {
+      setConnected(false)
+      setTimeout(connectWs, 3000)
+    }
+    s.onerror = (err) => {
+      console.error('WebSocket error:', err)
+      s.close()
+    }
     s.onmessage = (e) => {
       const d = JSON.parse(e.data)
       if (d.status === 'success') {
@@ -31,18 +42,33 @@ export default function App() {
         setStatus(pct > 1 ? 'danger' : 'safe')
       } else {
         setStatus('idle')
+        alert(`Error from server: ${d.message}`)
       }
     }
-    setWs(s)
-    return () => s.close()
+    wsRef.current = s
+  }
+
+  useEffect(() => {
+    connectWs()
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.onclose = null
+        wsRef.current.close()
+      }
+    }
   }, [])
 
   useEffect(() => {
-    if (selectedImage && ws?.readyState === WebSocket.OPEN) {
-      setStatus('predicting')
-      ws.send(JSON.stringify({ type: 'predict', image: selectedImage }))
+    if (selectedImage) {
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        setStatus('predicting')
+        wsRef.current.send(JSON.stringify({ type: 'predict', image: selectedImage }))
+      } else {
+        // Wait for connection
+        setStatus('idle')
+      }
     }
-  }, [selectedImage])
+  }, [selectedImage, connected])
 
   const loadFile = (file: File) => {
     setMaskImage(null); setOverlayImage(null); setStatus('idle')

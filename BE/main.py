@@ -16,13 +16,13 @@ async def lifespan(app: FastAPI):
     try:
         from huggingface_hub import hf_hub_download
         
-        print("Downloading/Loading model from Hugging Face...")
+        print("Downloading/Loading model from Hugging Face...", flush=True)
         model_path = hf_hub_download(repo_id="Thangdzzzz/mri-segmentation", filename="brain_tumor_unet.keras")
         
         model = tf.keras.models.load_model(model_path, compile=False)
-        print("✅ AI Model loaded successfully")
+        print("AI Model loaded successfully", flush=True)
     except Exception as e:
-        print(f"❌ Error loading model: {e}")
+        print(f"Error loading model: {e}", flush=True)
     yield
     model = None
 
